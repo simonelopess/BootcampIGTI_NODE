@@ -18,7 +18,6 @@
 // });
 
 //utilizando promises
-import { promises as fs } from 'fs';
 // fs.writeFile('teste.txt', 'bla bla bla')
 //   .then(() => {
 //     fs.appendFile('teste.txt', '\nteste apend file')
@@ -37,13 +36,35 @@ import { promises as fs } from 'fs';
 
 //utilizando async await
 
-init();
-async function init() {
+// init();
+// async function init() {
+//   try {
+//     await fs.writeFile('teste.txt', 'bla bla bla');
+//     await fs.appendFile('teste.txt', '\nteste apend file');
+//     const data = await fs.readFile('teste.txt', 'utf-8');
+//     console.log(data);
+
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+import { promises as fs } from 'fs';
+
+writeReadJson();
+
+async function writeReadJson() {
   try {
-    await fs.writeFile('teste.txt', 'bla bla bla');
-    await fs.appendFile('teste.txt', '\nteste apend file');
-    const data = await fs.readFile('teste.txt', 'utf-8');
+    const arrayCarros = ['gol', 'palio', 'uno'];
+    const obj = {
+      carros: arrayCarros,
+    };
+
+    await fs.writeFile('teste.json', JSON.stringify(obj));
+    const data = JSON.parse(await fs.readFile('teste.json'));
+    data.carros.push('Sandero');
     console.log(data);
+    await fs.writeFile('teste.json', JSON.stringify(data));
   } catch (err) {
     console.log(err);
   }
