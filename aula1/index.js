@@ -1,0 +1,9 @@
+const numero = 1000;
+const multiplos = [];
+for (let i = 0; i < numero; i++) {
+  if (i % 3 === 0 || i % 5 === 0) {
+    multiplos.push(i);
+  }
+}
+
+console.log(multiplos);
